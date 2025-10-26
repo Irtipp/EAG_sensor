@@ -67,7 +67,7 @@ audio_dB_smooth = movmean(audio_dB, windowSize);
 % ---- Plot dB over time ----
 plot(t, audio_dB_smooth);
 xlabel('Time (t) [s]');
-ylable('Sound (s) [dB]')
+ylabel('Sound (s) [dB]')
 title('Smoothed Audio Signal in Decibels');
 grid on;
 % ---- Optional: Play back the recording ----
