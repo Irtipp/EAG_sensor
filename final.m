@@ -5,7 +5,7 @@ clc
 clear
 close all
 % Connect to Arduino
-a = arduino("COM5", "Uno", 'Libraries', 'Adafruit/DHTxx');
+a = arduino("/dev/ttyACM0", "Uno", 'Libraries', 'Adafruit/DHTxx');
 
 % Create DHT sensor object on digital pin D3
 dhtSensor = addon(a, 'Adafruit/DHTxx', 'D3', 'DHT11');
@@ -47,14 +47,8 @@ disp('End of recording.');
 audioData = getaudiodata(recObj);
 % Time vector
 t = (0:length(audioData)-1)/Fs;
-% ---- Plot waveform ----
 figure;
 subplot(2,1,1);
-plot(t, audioData);
-xlabel('Time (t) [s]');
-ylabel('Amplitude (A) [idk]');
-title('Captured Audio Signal');
-grid on;
 % ---- RMS calculation ----
 rms_amplitude = rms(audioData);
 disp(['RMS Amplitude: ', num2str(rms_amplitude)]);
@@ -72,9 +66,9 @@ title('Smoothed Audio Signal in Decibels');
 grid on;
 % ---- Optional: Play back the recording ----
 % play(recObj);
-disp('Playing recorded audio...');
-play(recObj);
-disp("Measurements complete.");
+%disp('Playing recorded audio...');
+%play(recObj);
+%disp("Measurements complete.");
 
 % Plot temp
 subplot(2,1,2)
@@ -82,5 +76,5 @@ plot(Time, Temperature, 'r-o');
 title('Temperature over Time');
 xlabel('Time (t) [s]');
 ylabel('Temperature (T) [degC]');
-legend('Sound (s) dB', 'Temp (t) DegC]')
+legend('Temp (t) DegC]')
 grid on;
